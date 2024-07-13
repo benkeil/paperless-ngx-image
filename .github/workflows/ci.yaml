@@ -12,12 +12,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-      - run: echo ${{ secrets.GITHUB_TOKEN }} | rev
-      - run: echo ${{ secrets.APP_GITHUB_TOKEN }} | rev
       - uses: cycjimmy/semantic-release-action@v4
+        name: semantic release
         id: semantic
         env:
-          GITHUB_TOKEN: ${{ secrets.APP_GITHUB_TOKEN }}
+          GITHUB_TOKEN: "${{ secrets.APP_GITHUB_TOKEN }}1"
       - name: write job summary
         run: |
           echo "__release-version__: ${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_STEP_SUMMARY
