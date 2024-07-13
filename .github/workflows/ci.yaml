@@ -26,6 +26,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          logout: false
       - id: meta
         uses: docker/metadata-action@v4
         with:
