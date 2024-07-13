@@ -49,5 +49,5 @@ jobs:
           targets: build
           push: true
           set: |
-            *.cache-from=type=gha
-            *.cache-to=type=gha,mode=max
+            *.cache-from=type=gha,scope=${{ env.IMAGE_NAME }}
+            *.cache-to=type=gha,mode=max,scope=${{ env.IMAGE_NAME }}
