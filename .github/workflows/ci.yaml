@@ -4,13 +4,12 @@ on:
   push:
     branches: [ main ]
 
-permissions: write-all
-#  contents: read
-#  packages: write
-#  id-token: write
+permissions:
+  contents: read
+  packages: write
+  id-token: write
 
 env:
-  BUILD_PLATFORMS: linux/arm64
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
@@ -47,12 +46,3 @@ jobs:
           set: |
             *.cache-from=type=gha
             *.cache-to=type=gha,mode=max
-#      - uses: docker/build-push-action@v6
-#        with:
-#          context: .
-#          platforms: ${{ env.BUILD_PLATFORMS }}
-#          push: true
-#          cache-from: type=gha
-#          cache-to: type=gha,mode=max`
-#          tags: ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
