@@ -4,13 +4,15 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  packages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: extractions/setup-just@v1
-      - name: Build docker images
-        run: just build
-      - name: Run tests
-        run: just publish
+      - run: just build
+      - run: just publish

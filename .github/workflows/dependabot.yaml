@@ -3,13 +3,16 @@
 # Generated with https://github.com/krzema12/github-workflows-kt
 
 name: merge dependabot pull requests
+
 on:
   pull_request:
     types:
       - opened
       - reopened
       - synchronize
+
 permissions: write-all
+
 jobs:
   check:
     runs-on: ubuntu-latest
