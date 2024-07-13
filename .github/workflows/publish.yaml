@@ -50,5 +50,3 @@ jobs:
           set: |
             *.cache-from=type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
             *.cache-to=type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
-#            *.cache-from=type=gha,scope=${{ env.IMAGE_NAME }}
-#            *.cache-to=type=gha,mode=max,scope=${{ env.IMAGE_NAME }}
