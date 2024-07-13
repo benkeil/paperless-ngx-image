@@ -4,10 +4,10 @@ on:
   push:
     branches: [ main ]
 
-permissions:
-  contents: read
-  packages: write
-  id-token: write
+permissions: write-all
+#  contents: read
+#  packages: write
+#  id-token: write
 
 env:
   BUILD_PLATFORMS: linux/arm64
@@ -43,6 +43,9 @@ jobs:
             ${{ steps.meta.outputs.bake-file }}
           targets: build
           push: true
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
 #      - uses: docker/build-push-action@v6
 #        with:
 #          context: .
