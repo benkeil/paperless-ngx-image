@@ -18,15 +18,17 @@ jobs:
     steps:
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
-      - uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.repository }}
-          path: /tmp/${{ github.repository }}.tar
       - uses: docker/build-push-action@v6
         with:
           platforms: ${{ env.BUILD_PLATFORMS }}
           load: true
           tags: ${{ github.repository }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max`
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.repository }}
+          path: /tmp/${{ github.repository }}.tar
 
   push:
     runs-on: ubuntu-latest
