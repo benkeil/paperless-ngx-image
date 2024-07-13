@@ -11,22 +11,44 @@ permissions:
 
 env:
   BUILD_PLATFORMS: linux/arm64
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action@v6
+      - id: meta
+        uses: docker/metadata-action@v4
         with:
-          platforms: ${{ env.BUILD_PLATFORMS }}
-          tags: ghcr.io/${{ github.repository }}:latest
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+      - uses: docker/bake-action@v5
+        with:
+          files: |
+            ./docker-bake.hcl
+            ${{ steps.meta.outputs.bake-file }}
+          targets: build
           push: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max`
+#      - uses: docker/build-push-action@v6
+#        with:
+#          context: .
+#          platforms: ${{ env.BUILD_PLATFORMS }}
+#          push: true
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max`
+#          tags: ${{ steps.meta.outputs.tags }}
+#          labels: ${{ steps.meta.outputs.labels }}
