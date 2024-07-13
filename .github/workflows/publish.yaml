@@ -3,7 +3,7 @@ name: publish
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch: {}
 
 permissions:
@@ -16,7 +16,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  ci:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

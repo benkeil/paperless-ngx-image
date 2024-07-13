@@ -12,4 +12,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - run: npx semantic-release
+      - uses: cycjimmy/semantic-release-action@v4
+        id: semantic
+      - name: write job summary
+        run: |
+          echo "__release-version__: ${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_STEP_SUMMARY
+
