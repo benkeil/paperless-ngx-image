@@ -15,7 +15,7 @@ jobs:
       - uses: cycjimmy/semantic-release-action@v4
         id: semantic
         with:
-          github_token: ${{ secrets.APP_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.APP_GITHUB_TOKEN }}
       - name: write job summary
         run: |
           echo "__release-version__: ${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_STEP_SUMMARY
