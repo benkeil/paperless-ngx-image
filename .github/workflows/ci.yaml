@@ -18,7 +18,7 @@ jobs:
         name: semantic release
         id: semantic
         env:
-          GITHUB_TOKEN: "${{ secrets.GH_TOKEN }}1"
+          GITHUB_TOKEN: "${{ secrets.GH_TOKEN }}"
       - name: write job summary
         run: |
           echo "__release-version__: ${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_STEP_SUMMARY
