@@ -39,7 +39,6 @@ jobs:
             type=semver,pattern={{major}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{version}}
-            type=sha
       - uses: docker/bake-action@v5
         with:
           files: |
