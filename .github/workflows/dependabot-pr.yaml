@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - run: gh pr merge --auto --merge "$PR_URL"
-        if: github.actor == 'dependabot[bot]' && steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        if: github.actor == 'dependabot[bot]'
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.APP_GH_TOKEN }}
