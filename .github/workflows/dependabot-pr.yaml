@@ -16,11 +16,13 @@ permissions: write-all
 jobs:
   check:
     runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
     steps:
       - uses: actions/checkout@v4
       - run: echo skip for now
   merge:
     runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
     needs:
       - check
     steps:
