@@ -1,4 +1,4 @@
-FROM ghcr.io/paperless-ngx/paperless-ngx:2.11
+FROM ghcr.io/paperless-ngx/paperless-ngx:2.12
 LABEL authors="benkeil"
 RUN apt-get update \
     && apt-get install -y build-essential libssl-dev cmake \
